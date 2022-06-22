@@ -12,6 +12,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import FullWidthCard from '../components/FullWidthCard';
 import RocketCard from '../components/RocketCard';
 import Loader from '../components/Loader';
+import {Text} from 'react-native';
 
 export const RocketsScreen = () => {
   const navigation = useNavigation<rocketsScreenProp>();
@@ -22,18 +23,25 @@ export const RocketsScreen = () => {
       active: true,
     },
   });
-  const {data, hasNextPage, fetchNextPage, isFetchingNextPage, refetch} =
-    useInfiniteQuery(
-      'rockets',
-      ({pageParam = 1}) => rocketApi.getAll(params, pageParam),
-      {
-        getNextPageParam: lastPage => {
-          if (lastPage.nextPage !== null) {
-            return lastPage.nextPage;
-          }
-        },
+  const {
+    data,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+    refetch,
+    isError,
+    isLoading,
+  } = useInfiniteQuery(
+    'rockets',
+    ({pageParam = 1}) => rocketApi.getAll(params, pageParam),
+    {
+      getNextPageParam: lastPage => {
+        if (lastPage.nextPage !== null) {
+          return lastPage.nextPage;
+        }
       },
-    );
+    },
+  );
   const refetching = () => {
     refetch();
   };
@@ -61,6 +69,9 @@ export const RocketsScreen = () => {
           Active
         </FilteredButton>
       </FilterWrapper>
+      {isLoading && <Loader isLoading={isLoading} />}
+      {isError && <Text>An Error Occurred</Text>}
+
       <FlatList
         data={data?.pages.map(page => page.docs).flat()}
         renderItem={({item}) => (

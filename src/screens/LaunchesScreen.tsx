@@ -12,6 +12,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import FullWidthCard from '../components/FullWidthCard';
 import LaunchCard from '../components/LaunchCard';
 import Loader from '../components/Loader';
+import {Text} from 'react-native';
 
 export const LaunchesScreen = () => {
   const navigation = useNavigation<launchesScreenProp>();
@@ -24,18 +25,25 @@ export const LaunchesScreen = () => {
     },
   });
 
-  const {data, hasNextPage, fetchNextPage, isFetchingNextPage, refetch} =
-    useInfiniteQuery(
-      'launches',
-      ({pageParam = 1}) => launchApi.getAll(params, pageParam),
-      {
-        getNextPageParam: lastPage => {
-          if (lastPage.nextPage !== null) {
-            return lastPage.nextPage;
-          }
-        },
+  const {
+    data,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+    refetch,
+    isLoading,
+    isError,
+  } = useInfiniteQuery(
+    'launches',
+    ({pageParam = 1}) => launchApi.getAll(params, pageParam),
+    {
+      getNextPageParam: lastPage => {
+        if (lastPage.nextPage !== null) {
+          return lastPage.nextPage;
+        }
       },
-    );
+    },
+  );
   const refetching = () => {
     refetch();
   };
@@ -88,6 +96,9 @@ export const LaunchesScreen = () => {
           Upcoming
         </FilteredButton>
       </FilterWrapper>
+      {isLoading && <Loader isLoading={isLoading} />}
+      {isError && <Text>An Error Occurred</Text>}
+
       <FlatList
         data={data?.pages.map(page => page.docs).flat()}
         renderItem={({item}) => (

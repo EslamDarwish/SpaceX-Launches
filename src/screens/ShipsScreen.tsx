@@ -12,6 +12,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import FullWidthCard from '../components/FullWidthCard';
 import ShipCard from '../components/ShipCard';
 import Loader from '../components/Loader';
+import {Text} from 'react-native';
 
 export const ShipsScreen = () => {
   const navigation = useNavigation<shipsScreenProp>();
@@ -22,18 +23,25 @@ export const ShipsScreen = () => {
       active: true,
     },
   });
-  const {data, hasNextPage, fetchNextPage, isFetchingNextPage, refetch} =
-    useInfiniteQuery(
-      'ships',
-      ({pageParam = 1}) => shipsApi.getAll(params, pageParam),
-      {
-        getNextPageParam: lastPage => {
-          if (lastPage.nextPage !== null) {
-            return lastPage.nextPage;
-          }
-        },
+  const {
+    data,
+    hasNextPage,
+    fetchNextPage,
+    isLoading,
+    isFetchingNextPage,
+    refetch,
+    isError,
+  } = useInfiniteQuery(
+    'ships',
+    ({pageParam = 1}) => shipsApi.getAll(params, pageParam),
+    {
+      getNextPageParam: lastPage => {
+        if (lastPage.nextPage !== null) {
+          return lastPage.nextPage;
+        }
       },
-    );
+    },
+  );
 
   const refetching = () => {
     refetch();
@@ -62,6 +70,8 @@ export const ShipsScreen = () => {
           Active
         </FilteredButton>
       </FilterWrapper>
+      {isLoading && <Loader isLoading={isLoading} />}
+      {isError && <Text>An Error Occurred</Text>}
       <FlatList
         data={data?.pages.map(page => page.docs).flat()}
         renderItem={({item}) => (

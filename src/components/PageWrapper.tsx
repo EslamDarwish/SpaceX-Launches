@@ -1,9 +1,10 @@
-import React, {ReactChild} from 'react';
+import React from 'react';
+import {ReactNode} from 'react';
 import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 interface Props {
-  children?: ReactChild | ReactChild[];
+  children?: ReactNode | ReactNode[];
 }
 
 const PageWrapper = ({children}: Props) => {
