@@ -64,7 +64,8 @@ export const RocketsScreen = () => {
       <FlatList
         data={data?.pages.map(page => page.docs).flat()}
         renderItem={({item}) => (
-          <FullWidthCard>
+          <FullWidthCard
+            onPress={() => navigation.navigate('Rocket', {value: item})}>
             <RocketCard value={item} />
           </FullWidthCard>
         )}

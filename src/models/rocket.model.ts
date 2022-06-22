@@ -20,7 +20,7 @@ export interface Rocket {
   diameter: {meters: number; feet: number};
   mass: {kg: number; lb: number};
   payload_weights: payload_weight[];
-  flicker_images?: string[];
+  flickr_images: string[];
   wikipedia?: string;
   description?: string;
 }

@@ -65,7 +65,8 @@ export const ShipsScreen = () => {
       <FlatList
         data={data?.pages.map(page => page.docs).flat()}
         renderItem={({item}) => (
-          <FullWidthCard>
+          <FullWidthCard
+            onPress={() => navigation.navigate('Ship', {value: item})}>
             <ShipCard value={item} />
           </FullWidthCard>
         )}

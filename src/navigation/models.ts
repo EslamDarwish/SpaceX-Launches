@@ -13,11 +13,11 @@ export type LaunchesNavigatorParams = {
 
 export type ShipsNavigatorParams = {
   Ships: undefined;
-  Ship: undefined;
+  Ship: {value: Launch};
 };
 export type RocketsNavigatorParams = {
   Rockets: undefined;
-  Rocket: undefined;
+  Rocket: {value: Launch};
 };
 
 export type launchesScreenProp = NativeStackNavigationProp<

@@ -23,6 +23,7 @@ export interface Launch {
   details: string;
   auto_update: boolean;
   launch_library_id?: string;
+  links: {patch: {small?: string; large?: string}};
 }
 export interface LaunchParams {
   query: {

@@ -5,7 +5,7 @@ const Title = ({children}: {children: string}) => {
   return <Text style={styles.title}>{children}</Text>;
 };
 const styles = StyleSheet.create({
-  title: {fontWeight: 'bold', fontSize: 16, paddingBottom: 5},
+  title: {fontWeight: 'bold', fontSize: 16, marginVertical: 5},
 });
 
 export default Title;
