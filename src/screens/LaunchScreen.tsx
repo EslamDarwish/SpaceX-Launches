@@ -1,10 +1,23 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {RouteProp} from '@react-navigation/native';
+import {Launch} from '../models/launch.model';
+import Title from '../common/Title';
 
-const LaunchScreen = () => {
+const LaunchScreen = ({
+  route,
+}: {
+  route: RouteProp<{params: {value: Launch}}, 'params'>;
+}) => {
+  const [data, setData] = useState<Launch>(route.params.value);
+  useEffect(() => {
+    setData(route.params.value);
+  }, [route.params.value]);
+
   return (
     <View>
-      <Text>LaunchScreen</Text>
+      <Title>{data?.name}</Title>
+      <Text>{}</Text>
     </View>
   );
 };

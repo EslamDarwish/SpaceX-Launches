@@ -1,11 +1,20 @@
 import {Dimensions, StyleSheet} from 'react-native';
 import React, {PureComponent} from 'react';
 import {Card} from 'react-native-elements';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export class FullWidthCard extends PureComponent {
+interface Props {
+  onPress?: () => void;
+}
+
+export class FullWidthCard extends PureComponent<Props, {}> {
   render() {
-    const {children} = this.props;
-    return <Card containerStyle={styles.cardContainer}>{children}</Card>;
+    const {children, onPress} = this.props;
+    return (
+      <TouchableOpacity onPress={onPress}>
+        <Card containerStyle={styles.cardContainer}>{children}</Card>
+      </TouchableOpacity>
+    );
   }
 }
 const styles = StyleSheet.create({

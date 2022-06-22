@@ -1,3 +1,4 @@
+import {Launch} from './../models/launch.model';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 export type TabNavigatorParamsList = {
   LaunchesStack: undefined;
@@ -7,7 +8,7 @@ export type TabNavigatorParamsList = {
 
 export type LaunchesNavigatorParams = {
   Launches: undefined;
-  Launch: undefined;
+  Launch: {value: Launch};
 };
 
 export type ShipsNavigatorParams = {

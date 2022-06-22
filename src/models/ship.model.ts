@@ -23,6 +23,7 @@ export interface Ship {
   link?: string;
   image?: string;
   launches: Launch[];
+  id: string;
 }
 export interface ShipParams {
   query: {
