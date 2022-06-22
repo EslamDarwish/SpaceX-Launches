@@ -1,0 +1,5 @@
+1. Install JavaScript dependencies using yarn,
+2. Install iOS dependencies using pod install command from the ios directory,
+3. Run the project using command yarn ios or yarn android
+
+In case of any issues with the above instruction, feel free to contact us. Good luck!
