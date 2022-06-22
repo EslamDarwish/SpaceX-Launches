@@ -5,7 +5,7 @@ import Title from '../common/Title';
 import Detail from '../common/Detail';
 import {Rocket} from '../models/rocket.model';
 import {RouteProp} from '@react-navigation/native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 import {Card, Image} from 'react-native-elements';
 
 const RocketScreen = ({
@@ -20,21 +20,22 @@ const RocketScreen = ({
   return (
     <View style={styles.header}>
       <Title>{data?.name}</Title>
-      <ScrollView horizontal>
-        {data?.flickr_images.map((image, index) => {
-          return (
-            <Card>
-              <Image
-                source={{uri: image}}
-                style={styles.image}
-                height={100}
-                width={100}
-                key={index}
-              />
-            </Card>
-          );
-        })}
-      </ScrollView>
+      <FlatList
+        horizontal
+        data={data?.flickr_images}
+        renderItem={({item, index}) => (
+          <Card>
+            <Image
+              source={{uri: item}}
+              style={styles.image}
+              height={200}
+              width={200}
+              key={index}
+            />
+          </Card>
+        )}
+        keyExtractor={item => item.toString()}
+      />
 
       <DetailsWrapper>
         <Detail>
@@ -76,6 +77,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  image: {width: 100, height: 100},
+  image: {width: 200, height: 200},
 });
 export default RocketScreen;
