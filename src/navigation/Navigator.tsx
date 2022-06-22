@@ -3,19 +3,20 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {TabNavigatorParamsList} from './models';
-import {LaunchesScreen} from '../screens/LaunchesScreen';
-import {RocketsScreen} from '../screens/RocketsScreen';
-import {ShipsScreen} from '../screens/ShipsScreen';
+import {LaunchesNavigator, RocketsNavigator, ShipsNavigator} from './Stacks';
 
 const TabNavigator = createBottomTabNavigator<TabNavigatorParamsList>();
 
 export const Navigator = () => {
   return (
     <NavigationContainer>
-      <TabNavigator.Navigator>
-        <TabNavigator.Screen name="Launches" component={LaunchesScreen} />
-        <TabNavigator.Screen name="Rockets" component={RocketsScreen} />
-        <TabNavigator.Screen name="Ships" component={ShipsScreen} />
+      <TabNavigator.Navigator screenOptions={{headerShown: false}}>
+        <TabNavigator.Screen
+          name="LaunchesStack"
+          component={LaunchesNavigator}
+        />
+        <TabNavigator.Screen name="RocketsStack" component={RocketsNavigator} />
+        <TabNavigator.Screen name="ShipsStack" component={ShipsNavigator} />
       </TabNavigator.Navigator>
     </NavigationContainer>
   );
