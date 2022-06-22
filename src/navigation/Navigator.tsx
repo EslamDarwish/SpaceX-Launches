@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {TabNavigatorParamsList} from './models';
 import {LaunchesScreen} from '../screens/LaunchesScreen';
-import {MissionsScreen} from '../screens/MissionsScreen';
+import {RocketsScreen} from '../screens/RocketsScreen';
 import {ShipsScreen} from '../screens/ShipsScreen';
 
 const TabNavigator = createBottomTabNavigator<TabNavigatorParamsList>();
@@ -14,7 +14,7 @@ export const Navigator = () => {
     <NavigationContainer>
       <TabNavigator.Navigator>
         <TabNavigator.Screen name="Launches" component={LaunchesScreen} />
-        <TabNavigator.Screen name="Missions" component={MissionsScreen} />
+        <TabNavigator.Screen name="Rockets" component={RocketsScreen} />
         <TabNavigator.Screen name="Ships" component={ShipsScreen} />
       </TabNavigator.Navigator>
     </NavigationContainer>

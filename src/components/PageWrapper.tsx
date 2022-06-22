@@ -3,13 +3,14 @@ import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 interface Props {
-  children?: ReactChild;
+  children?: ReactChild | ReactChild[];
 }
 
 const PageWrapper = ({children}: Props) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
+    flex: 1,
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 

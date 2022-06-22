@@ -1,19 +1,37 @@
-import React from 'react';
-import {Text, StyleSheet} from 'react-native';
+import * as React from 'react';
+import {useState} from 'react';
+
+import {useInfiniteQuery} from 'react-query';
+import {launchesApi} from '../services/launch';
 import PageWrapper from '../components/PageWrapper';
+import {Text} from 'react-native-elements';
 
 export const LaunchesScreen = () => {
+  const [params, setParams] = useState<{
+    query: {upcoming: boolean; success?: boolean | null; name?: any};
+  }>({
+    query: {
+      upcoming: false,
+      success: true,
+    },
+  });
+  const {data} = useInfiniteQuery(
+    'launches',
+    ({pageParam = 1}) => launchesApi.fetchLaunches(params, pageParam),
+    {
+      getNextPageParam: lastPage => {
+        if (lastPage.nextPage !== null) {
+          return lastPage.nextPage;
+        }
+      },
+    },
+  );
+
   return (
     <PageWrapper>
-      <Text style={styles.title}>Launches</Text>
+      <Text>
+        {JSON.stringify(data?.pages.map(page => page.totalDocs).flat())}
+      </Text>
     </PageWrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    padding: 16,
-    fontSize: 24,
-    textAlign: 'center',
-  },
-});

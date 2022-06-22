@@ -2,10 +2,10 @@ import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import PageWrapper from '../components/PageWrapper';
 
-export const MissionsScreen = () => {
+export const RocketsScreen = () => {
   return (
     <PageWrapper>
-      <Text style={styles.title}>Missions</Text>
+      <Text style={styles.title}>Rockets</Text>
     </PageWrapper>
   );
 };

@@ -1,5 +1,5 @@
 export type TabNavigatorParamsList = {
   Launches: undefined;
-  Missions: undefined;
+  Rockets: undefined;
   Ships: undefined;
 };
