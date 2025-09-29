@@ -55,3 +55,7 @@ This error means that the NestJS dependency injection container cannot find a `J
    If your guard injects additional dependencies (for example, `PrismaService`), make sure those services are provided within the same module or imported modules.
 
 After making these changes, restart the application. Nest should now be able to instantiate `JwtAuthGuard` without throwing `UnknownDependenciesException`.
+
+## Example implementation in this repository
+
+See [`backend/`](../backend) for a minimal NestJS setup that resolves the guard correctly. The `AuthModule` exports the configured `JwtModule`, and `UsersModule` imports it before providing `JwtAuthGuard`. This ensures the guard's constructor receives `JwtService` without triggering `UnknownDependenciesException`.
